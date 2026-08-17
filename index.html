@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Console de Demonstração DevOps | FAP 2026</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <section id="intro" class="intro">
+    <div class="intro-card">
+      <span class="kicker">FAP 2026 • DevOps • Aponti Academy</span>
+      <h1>Console de Demonstração<br>Terraform + Docker + LocalStack</h1>
+      <p>
+        Visualização integrada dos três desafios de provisionamento automático,
+        com acesso aos repositórios GitHub e endpoints locais do LocalStack.
+      </p>
+      <div class="intro-actions">
+        <button id="startDemo">▶ Iniciar demonstração</button>
+        <a href="#arquitetura">Ver arquitetura</a>
+      </div>
+      <div class="precheck">
+        <strong>Antes de apresentar:</strong>
+        Docker Desktop aberto • LocalStack em execução • navegador conectado ao ambiente local.
+      </div>
+    </div>
+  </section>
+
+  <header class="topbar">
+    <div>
+      <b>Arquitetura Integrada DevOps</b>
+      <small>Terraform → Docker Desktop → LocalStack → Amazon S3</small>
+    </div>
+    <div class="top-actions">
+      <button id="runFlow">▶ Executar fluxo</button>
+      <button id="resetFlow" class="ghost">↻ Reiniciar</button>
+      <a class="ghost-link" href="#validacao">Validação</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="overview" id="arquitetura">
+      <div class="status-grid">
+        <div class="status" data-status="terraform"><i></i><b>Terraform</b><span>AGUARDANDO</span></div>
+        <div class="status" data-status="docker"><i></i><b>Docker Desktop</b><span>AGUARDANDO</span></div>
+        <div class="status" data-status="localstack"><i></i><b>LocalStack</b><span>AGUARDANDO</span></div>
+        <div class="status" data-status="s3"><i></i><b>Amazon S3</b><span>AGUARDANDO</span></div>
+      </div>
+
+      <div class="flow" id="flow">
+        <div class="node" data-node="terraform">
+          <span class="node-label">IaC</span>
+          <strong>Terraform</strong>
+          <small>terraform apply</small>
+        </div>
+        <div class="connector"><span></span><b>→</b></div>
+        <div class="node" data-node="docker">
+          <span class="node-label">Runtime</span>
+          <strong>Docker Desktop</strong>
+          <small>containers</small>
+        </div>
+        <div class="connector"><span></span><b>→</b></div>
+        <div class="node" data-node="localstack">
+          <span class="node-label">AWS local</span>
+          <strong>LocalStack</strong>
+          <small>localhost:4566</small>
+        </div>
+        <div class="connector"><span></span><b>→</b></div>
+        <div class="node" data-node="s3">
+          <span class="node-label">Serviço</span>
+          <strong>Amazon S3</strong>
+          <small>Static Website</small>
+        </div>
+      </div>
+
+      <div id="liveMessage" class="live-message">
+        Ambiente pronto para demonstração.
+      </div>
+    </section>
+
+    <section class="challenges">
+      <article class="challenge" data-challenge="1">
+        <div class="challenge-head">
+          <div><span>DESAFIO 01</span><h2>Frontends S3</h2></div>
+          <strong class="challenge-state">OFFLINE</strong>
+        </div>
+        <p>Três aplicações publicadas em buckets S3 simulados pelo LocalStack.</p>
+
+        <div class="screens triple">
+          <figure>
+            <img src="assets/desafio1-vendas.png" alt="Frontend vendas">
+            <figcaption>Vendas</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/desafio1-admin.png" alt="Frontend admin">
+            <figcaption>Admin</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/desafio1-cliente.png" alt="Frontend cliente">
+            <figcaption>Cliente</figcaption>
+          </figure>
+        </div>
+
+        <div class="resource-list">
+          <span>🪣 app-frontend-vendas</span>
+          <span>🪣 app-frontend-admin</span>
+          <span>🪣 app-frontend-cliente</span>
+        </div>
+
+        <div class="action-row">
+          <a class="github" target="_blank" href="https://github.com/alexsabrasil/terraform-localstack-desafio-1">GitHub</a>
+          <a target="_blank" href="http://app-frontend-vendas.s3-website.localhost.localstack.cloud:4566/">Vendas</a>
+          <a target="_blank" href="http://app-frontend-admin.s3-website.localhost.localstack.cloud:4566/">Admin</a>
+          <a target="_blank" href="http://app-frontend-cliente.s3-website.localhost.localstack.cloud:4566/">Cliente</a>
+        </div>
+      </article>
+
+      <article class="challenge" data-challenge="2">
+        <div class="challenge-head">
+          <div><span>DESAFIO 02</span><h2>Landing Page</h2></div>
+          <strong class="challenge-state">OFFLINE</strong>
+        </div>
+        <p>Site estático provisionado por Terraform e hospedado no S3 local.</p>
+
+        <img class="main-screen" src="assets/desafio2.png" alt="Landing page do desafio 2">
+
+        <div class="resource-list">
+          <span>🪣 desafio-2-landing-page</span>
+          <span>index.html</span>
+          <span>style.css</span>
+        </div>
+
+        <div class="action-row">
+          <a class="github" target="_blank" href="https://github.com/alexsabrasil/terraform-localstack-desafio-2">GitHub</a>
+          <a target="_blank" href="http://desafio-2-landing-page.s3-website.localhost.localstack.cloud:4566/">Abrir aplicação</a>
+        </div>
+      </article>
+
+      <article class="challenge" data-challenge="3">
+        <div class="challenge-head">
+          <div><span>DESAFIO 03</span><h2>Cloud Dashboard</h2></div>
+          <strong class="challenge-state">OFFLINE</strong>
+        </div>
+        <p>Dashboard com HTML, CSS e JavaScript servido pelo S3 simulado.</p>
+
+        <img class="main-screen" src="assets/desafio3.png" alt="Cloud dashboard do desafio 3">
+
+        <div class="resource-list">
+          <span>🪣 desafio-3-cloud-dashboard</span>
+          <span>index.html</span>
+          <span>style.css</span>
+          <span>script.js</span>
+        </div>
+
+        <div class="action-row">
+          <a class="github" target="_blank" href="https://github.com/alexsabrasil/terraform-localstack-desafio-3">GitHub</a>
+          <a target="_blank" href="http://desafio-3-cloud-dashboard.s3-website.localhost.localstack.cloud:4566/">Abrir dashboard</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="validation" id="validacao">
+      <div class="validation-copy">
+        <span class="kicker">Comprovação técnica</span>
+        <h2>Validação do ambiente</h2>
+        <p>
+          Esta seção não executa os comandos. Ela mostra quais verificações devem ser exibidas
+          no terminal caso o professor queira confirmar o funcionamento real do ambiente.
+        </p>
+      </div>
+
+      <div class="terminal">
+        <div class="terminal-top"><span></span><span></span><span></span><b>PowerShell</b></div>
+        <div class="command"><code>docker ps</code><em>LocalStack RUNNING / healthy</em></div>
+        <div class="command"><code>terraform state list</code><em>recursos provisionados</em></div>
+        <div class="command"><code>terraform plan</code><em>No changes ✓</em></div>
+      </div>
+    </section>
+
+    <section class="repo-summary">
+      <h2>Repositórios da atividade</h2>
+      <div class="repo-grid">
+        <a target="_blank" href="https://github.com/alexsabrasil/terraform-localstack-desafio-1"><b>Desafio 1</b><span>terraform-localstack-desafio-1</span></a>
+        <a target="_blank" href="https://github.com/alexsabrasil/terraform-localstack-desafio-2"><b>Desafio 2</b><span>terraform-localstack-desafio-2</span></a>
+        <a target="_blank" href="https://github.com/alexsabrasil/terraform-localstack-desafio-3"><b>Desafio 3</b><span>terraform-localstack-desafio-3</span></a>
+      </div>
+    </section>
+
+    <section class="explanation">
+      <b>Leitura correta da arquitetura:</b>
+      Terraform provisiona a infraestrutura; Docker Desktop executa o container do LocalStack;
+      o LocalStack simula serviços AWS; o Amazon S3 hospeda os recursos; e as aplicações são acessadas
+      pelo navegador. Os desafios compartilham o mesmo ambiente, mas seus buckets são independentes.
+    </section>
+  </main>
+
+  <footer>Prática de Provisionamento Automático • FAP 2026</footer>
+  <script src="script.js"></script>
+</body>
+</html>
