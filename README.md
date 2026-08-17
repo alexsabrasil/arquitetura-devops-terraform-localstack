@@ -2,6 +2,8 @@
 
 Página interativa para apresentação dos três desafios de Terraform + Docker Desktop + LocalStack.
 
+<img width="856" height="589" alt="Image" src="https://github.com/user-attachments/assets/f3de9f4f-bf3c-449b-b74d-a9e74d8187bb" />
+
 ## Como abrir
 1. Descompacte a pasta.
 2. Abra a pasta no VS Code.
